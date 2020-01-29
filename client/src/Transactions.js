@@ -4,11 +4,17 @@ class Transactions extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            "transactions": []
+            transactions: [],
+            show: true
+
         }
         this.getTransactions = this.getTransactions.bind(this);
+        this.hideTransactions = this.hideTransactions.bind(this);
     }
 
+    hideTransactions() {
+        this.setState({ show: !this.state.show })
+    }
     getTransactions() {
         fetch("http://127.0.0.1:5000/api/transaction")
         .then(function(response) {
@@ -43,7 +49,13 @@ class Transactions extends React.Component {
             <div>
                 <h1>Hello from transactions.</h1>
                 <button onClick={this.getTransactions}>Test Here</button>
-                {currentTransactions}
+                <button onClick={this.hideTransactions}>Hide</button>
+                {this.state.show ?
+                    ( currentTransactions ) : (
+                       <div></div>
+                    )
+                }
+                
             </div>
         )
     }

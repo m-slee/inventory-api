@@ -104,10 +104,10 @@ def get_transaction(id):
 # add an item
 @app.route('/api/item', methods=['POST'])
 def add_item():
-    name = request.json['name']
-    description = request.json['description']
-    price = request.json['price']
-    quantity = request.json['quantity']
+    name = request.json["name"]
+    description = request.json["description"]
+    price = request.json["price"]
+    quantity = request.json["quantity"]
 
     new_item = Item(name, description, price, quantity)
     db.session.add(new_item)
@@ -123,7 +123,7 @@ def get_items():
     return jsonify(result)
 
 # get a single product
-@app.route('/item/<int:id>', methods=['GET'])
+@app.route('/api/item/<int:id>', methods=['GET'])
 def get_item(id):
     item = Item.query.get(id)
     return item_schema.jsonify(item)
